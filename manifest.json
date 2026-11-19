@@ -1,12 +1,11 @@
 {
   "name": "Digital Film Making Studio",
   "short_name": "Film Studio",
-  "description": "Script | Shoot | Edit | Release - Make Your Film in English, Bangla & French",
+  "description": "Script | Shoot | Edit | Release - Make Your Film",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f0f1a",
   "theme_color": "#ff2d55",
-  "orientation": "portrait",
   "icons": [
     {
       "src": "icon-192.svg",
@@ -19,12 +18,6 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
-    },
-    {
-      "src": "logo.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
     }
   ]
 }
