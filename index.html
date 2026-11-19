@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Film Making Studio</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1a1a2e">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;max-width:480px;margin:0 auto;background:#0f0f1a;color:#fff;padding:0}
+.header{background:linear-gradient(135deg,#ff2d55,#1a1a2e);border-bottom:3px solid #d4af37;padding:20px 15px 18px;text-align:center;position:relative}
+.app-logo{width:110px;height:110px;object-fit:cover;border-radius:50%;border:3px solid #d4af37;background:#fff;margin-bottom:8px;box-shadow:0 8px 25px rgba(0,0,0,.4)}
+.header h2{margin:0;font-size:20px;line-height:1.3}
+.header div{font-size:11px;color:#ffd1dc;margin-top:4px}
+.lang-btn{position:absolute;top:12px;right:12px;background:#fff;color:#e91e63;border:0;padding:7px 12px;border-radius:20px;font-weight:bold;font-size:12px;cursor:pointer}
+.tabs{display:flex;background:#1a1a2e;position:sticky;top:0;z-index:10;overflow-x:auto}
+.tab{flex:1;padding:12px 4px;text-align:center;cursor:pointer;border-bottom:3px solid #333;font-weight:bold;font-size:11px;color:#aaa;white-space:nowrap;min-width:75px}
+.tab.active{border-color:#ff2d55;color:#fff;background:#2a2a3e}
+.panel{display:none;padding:15px}
+.panel.active{display:block}
+h3{color:#ffcc00;margin:8px 0 12px}
+label{display:block;font-size:13px;color:#ddd;margin-top:10px;font-weight:600}
+input,select,textarea{width:100%;padding:11px;margin:6px 0;border:1px solid #444;border-radius:8px;font-size:14px;background:#222;color:#fff}
+textarea{min-height:90px}
+.btn{width:100%;padding:12px;border:0;border-radius:10px;font-size:15px;font-weight:bold;cursor:pointer;margin-top:10px;color:white}
+.btn-film{background:linear-gradient(90deg,#ff2d55,#ff9500)}
+.btn-script{background:linear-gradient(90deg,#7c4dff,#00b0ff)}
+.btn-budget{background:linear-gradient(90deg,#00c853,#00e676)}
+.btn-cast{background:linear-gradient(90deg,#ff4081,#7c4dff)}
+.btn-music{background:linear-gradient(90deg,#00bcd4,#3d5afe)}
+.btn-promo{background:linear-gradient(90deg,#ff6d00,#ffab00)}
+.card{background:#1e1e2e;border:1px solid #333;border-radius:12px;padding:12px;margin:10px 0}
+.result{background:#2a2a3e;padding:12px;border-radius:8px;margin-top:10px;line-height:1.7;border:1px dashed #ffcc00;font-size:14px;color:#fff}
+.tip{background:#2e2a00;border-left:4px solid #ffcc00;padding:10px;margin:8px 0;border-radius:6px;font-size:13px;color:#ffe082}
+.footer{background:#000;color:#aaa;text-align:center;padding:14px;font-size:12px}
+.shot{border:1px solid #444;padding:10px;border-radius:8px;margin:6px 0;background:#25253a}
+</style>
+</head>
+<body>
+<div class="header">
+  <button class="lang-btn" id="langBtn" onclick="toggleLang()">বাংলা / BN</button>
+  <img src="logo.png" alt="Digital Film Making Studio Logo" class="app-logo">
+  <h2><span data-en="Digital Film Making Studio" data-bn="ডিজিটাল ফিল্ম মেকিং স্টুডিও" data-fr="Studio de Cinéma Numérique">Digital Film Making Studio</span></h2>
+  <div><span data-en="Script | Shoot | Edit | Release - Make Your Film" data-bn="স্ক্রিপ্ট | শুট | এডিট | রিলিজ - তোমার ফিল্ম বানাও" data-fr="Scénario | Tournage | Montage | Sortie - Crée Ton Film">Script | Shoot | Edit | Release - Make Your Film</span></div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab(event,'script')"><span data-en="SCRIPT" data-bn="স্ক্রিপ্ট" data-fr="SCÉNARIO">SCRIPT</span></div>
+  <div class="tab" onclick="showTab(event,'story')"><span data-en="STORYBOARD" data-bn="স্টোরিবোর্ড" data-fr="STORYBOARD">STORYBOARD</span></div>
+  <div class="tab" onclick="showTab(event,'shoot')"><span data-en="SHOOT" data-bn="শুটিং" data-fr="TOURNAGE">SHOOT</span></div>
+  <div class="tab" onclick="showTab(event,'budget')"><span data-en="BUDGET" data-bn="বাজেট" data-fr="BUDGET">BUDGET</span></div>
+  <div class="tab" onclick="showTab(event,'edit')"><span data-en="EDIT" data-bn="এডিট" data-fr="MONTAGE">EDIT</span></div>
+  <div class="tab" onclick="showTab(event,'cast')"><span data-en="CASTING" data-bn="কাস্টিং" data-fr="CASTING">CASTING</span></div>
+  <div class="tab" onclick="showTab(event,'music')"><span data-en="MUSIC" data-bn="মিউজিক" data-fr="MUSIQUE">MUSIC</span></div>
+  <div class="tab" onclick="showTab(event,'promo')"><span data-en="PROMOTION" data-bn="প্রচারণা" data-fr="PROMOTION">PROMOTION</span></div>
+</div>
+
+<div id="script" class="panel active">
+  <h3><span data-en="🎬 Script Writer" data-bn="🎬 স্ক্রিপ্ট রাইটার" data-fr="🎬 Scénariste">🎬 Script Writer</span></h3>
+  <div class="card">
+    <label>Film Title / ফিল্মের নাম / Titre du Film</label><input type="text" id="f_title" placeholder="Amar Golpo / আমার গল্প / Mon Histoire">
+    <label>Genre / ধরন / Genre</label><select id="f_genre"><option value="drama">Drama - নাটক - Drame</option><option value="comedy">Comedy - কমেডি - Comédie</option><option value="horror">Horror - ভৌতিক - Horreur</option><option value="romance">Romance - প্রেম - Romance</option><option value="action">Action - অ্যাকশন - Action</option><option value="islamic">Islamic - ইসলামিক - Islamique</option><option value="documentary">Documentary - ডকুমেন্টারি - Documentaire</option></select>
+    <label>Duration (minutes) / সময় / Durée</label><input type="number" id="f_duration" value="10">
+    <label>Write Your Story Idea / গল্প লিখো / Écris Ton Idée</label><textarea id="f_story" placeholder="A boy comes from village... / একটা ছেলে গ্রাম থেকে আসে... / Un garçon vient du village..."></textarea>
+    <button class="btn btn-script" onclick="generateScript()">Generate Script Structure / স্ক্রিপ্ট বানাও / Générer</button>
+    <div id="script_res" class="result"></div>
+  </div>
+</div>
+
+<div id="story" class="panel">
+  <h3>🎞️ Storyboard Planner</h3>
+  <div class="card">
+    <label>Scene No / সিন নং / N° Scène</label><input type="number" id="sb_scene" value="1">
+    <label>Shot Type / শটের ধরন / Type de Plan</label><select id="sb_shot"><option value="Close Up">Close Up - ক্লোজ আপ - Gros Plan</option><option value="Wide Shot">Wide Shot - ওয়াইড - Plan Large</option><option value="Medium Shot">Medium Shot - মিডিয়াম - Plan Moyen</option><option value="Drone Shot">Drone Shot - ড্রোন - Plan Drone</option></select>
+    <label>Scene Description / বর্ণনা / Description</label><textarea id="sb_desc" placeholder="Hero walking..."></textarea>
+    <button class="btn btn-film" onclick="addStoryboard()">Add to Storyboard + / যোগ করো + / Ajouter +</button>
+    <div id="sb_list" class="result">No shots yet / এখনো কোনো শট নাই / Aucun plan</div>
+    <button class="btn" style="background:#555" onclick="clearBoard()">Clear / মুছে ফেলো / Effacer</button>
+  </div>
+</div>
+
+<div id="shoot" class="panel">
+  <h3>📷 Shooting Planner</h3>
+  <div class="card">
+    <label>Total Scenes / মোট সিন / Total Scènes</label><input type="number" id="sh_scenes" value="20">
+    <label>Shooting Days / শুটিং দিন / Jours</label><input type="number" id="sh_days" value="3">
+    <label>Location / লোকেশন / Lieu</label><select id="sh_loc"><option value="indoor">Indoor - ঘরের ভিতরে - Intérieur</option><option value="outdoor">Outdoor - বাইরে - Extérieur</option><option value="both">Both - দুইটাই - Les deux</option></select>
+    <label>Equipment / যন্ত্রপাতি / Équipement</label><select id="sh_equip"><option value="mobile">Mobile Phone - মোবাইল - Téléphone</option><option value="dslr">DSLR / Mirrorless</option><option value="cinema">Cinema Camera - সিনেমা ক্যামেরা - Caméra Cinéma</option></select>
+    <button class="btn btn-film" onclick="shootPlan()">Make Shooting Plan / প্ল্যান বানাও / Créer Plan</button>
+    <div id="shoot_res" class="result"></div>
+  </div>
+</div>
+
+<div id="budget" class="panel">
+  <h3>💰 Film Budget</h3>
+  <div class="card">
+    <label>Total Budget (Tk) / মোট বাজেট / Budget Total</label><input type="number" id="b_total" value="50000">
+    <button class="btn btn-budget" onclick="calcBudget()">Plan Budget / বাজেট প্ল্যান / Planifier</button>
+    <div id="b_res" class="result"></div>
+  </div>
+</div>
+
+<div id="edit" class="panel">
+  <h3>✂️ Editing & Release</h3>
+  <div class="card">
+    <label>Where to Release? / কোথায় রিলিজ? / Où Sortir?</label><select id="e_platform"><option value="youtube">YouTube</option><option value="facebook">Facebook</option><option value="tiktok">TikTok / Reels</option><option value="cinema">Cinema / Festival - সিনেমা - Cinéma</option></select>
+    <label>Film Length (min) / দৈর্ঘ্য / Durée</label><input type="number" id="e_len" value="10">
+    <button class="btn btn-film" onclick="editPlan()">Get Editing Plan / এডিটিং প্ল্যান / Plan Montage</button>
+    <div id="e_res" class="result"></div>
+  </div>
+</div>
+
+<div id="cast" class="panel">
+  <h3>🎭 Casting & Audition</h3>
+  <div class="card">
+    <label>Character Name / চরিত্র / Personnage</label><input type="text" id="cast_char" placeholder="Hero - Rafi">
+    <label>Actor Name / অভিনেতা / Acteur</label><input type="text" id="cast_actor" placeholder="Actor name">
+    <button class="btn btn-cast" onclick="addCast()">Add Cast + / কাস্ট যোগ করো + / Ajouter +</button>
+    <div id="cast_list" class="result">No cast yet / এখনো কেউ নাই / Aucun acteur</div>
+    <button class="btn" style="background:#555" onclick="clearCast()">Clear / মুছে ফেলো / Effacer</button>
+  </div>
+</div>
+
+<div id="music" class="panel">
+  <h3>🎵 Music & Sound Design</h3>
+  <div class="card">
+    <label>Scene Mood / মুড / Ambiance</label><select id="mus_mood"><option value="emotional">Emotional - আবেগ - Émotionnel</option><option value="happy">Happy - খুশি - Joyeux</option><option value="horror">Horror - ভয় - Horreur</option><option value="action">Action - অ্যাকশন - Action</option><option value="romantic">Romantic - প্রেম - Romantique</option><option value="islamic">Islamic - ইসলামিক - Islamique</option></select>
+    <button class="btn btn-music" onclick="musicSuggest()">Suggest Music / মিউজিক সাজেশন / Suggérer</button>
+    <div id="mus_res" class="result"></div>
+  </div>
+</div>
+
+<div id="promo" class="panel">
+  <h3>📣 Promotion & Release</h3>
+  <div class="card">
+    <label>Film Title / ফিল্মের নাম / Titre</label><input type="text" id="p_title" placeholder="Amar Golpo">
+    <label>Release Date / রিলিজ / Date</label><input type="date" id="p_date">
+    <label>Platform / প্ল্যাটফর্ম / Plateforme</label><select id="p_plat"><option value="youtube">YouTube</option><option value="facebook">Facebook</option><option value="tiktok">TikTok / Reels</option><option value="all">All - সব জায়গায় - Partout</option></select>
+    <button class="btn btn-promo" onclick="makePromo()">Generate Promotion Post / প্রচারণা বানাও / Générer</button>
+    <div id="promo_res" class="result"></div>
+  </div>
+</div>
+
+<div class="footer">
+  Digital Film Making Studio<br>
+  Developed by <b>Dr. Sumaiya Mohammad</b>, Bangladesh<br>
+  Make Your Dream Film 🎬<br>2026
+</div>
+
+<script>
+let langs=['en','bn','fr'];let langIndex=0;let currentLang='en';
+function toggleLang(){langIndex=(langIndex+1)%3;currentLang=langs[langIndex];document.getElementById('langBtn').textContent=currentLang==='en'?'বাংলা / BN':currentLang==='bn'?'Français / FR':'English / EN';document.querySelectorAll('[data-en]').forEach(el=>{let val=el.getAttribute('data-'+currentLang);if(val)el.textContent=val;});}
+function showTab(e,id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');e.target.classList.add('active');}
+function generateScript(){const title=document.getElementById('f_title').value||'Untitled Film';const genre=document.getElementById('f_genre').value;const dur=+document.getElementById('f_duration').value||10;const story=document.getElementById('f_story').value||'Your story...';const scenes=Math.ceil(dur/2);document.getElementById('script_res').innerHTML='<b>'+title+'</b> - '+genre+' - '+dur+' min<br><br><b>Story:</b> '+story+'<br><br>1. Opening - Character + Problem<br>2. Conflict - Tension rises<br>3. Climax - Biggest twist<br>4. Ending - Emotional<br><br>Scenes: ~'+scenes+' | Pages: ~'+dur;}
+let board=[];function addStoryboard(){const scene=document.getElementById('sb_scene').value;const shot=document.getElementById('sb_shot').value;const desc=document.getElementById('sb_desc').value||'No description';board.push('Scene '+scene+' | '+shot+'<br>'+desc);document.getElementById('sb_list').innerHTML=board.map((b,i)=>'<div class="shot"><b>Shot '+(i+1)+'</b><br>'+b+'</div>').join('')+'<br><b>Total: '+board.length+'</b>';}
+function clearBoard(){board=[];document.getElementById('sb_list').innerHTML='No shots yet / এখনো কোনো শট নাই / Aucun plan';}
+function shootPlan(){const scenes=+document.getElementById('sh_scenes').value||20;const days=+document.getElementById('sh_days').value||3;const perDay=Math.ceil(scenes/days);document.getElementById('shoot_res').innerHTML='Shooting Plan:<br>Scenes Per Day: '+perDay+'<br>Tip: Shoot same location together!';}
+function calcBudget(){const b=+document.getElementById('b_total').value||0;if(!b){document.getElementById('b_res').innerHTML='Enter budget';return;}const items=[['Camera / Equipment',0.25],['Actors / Team',0.20],['Location + Food',0.20],['Editing + Music',0.15],['Poster + Promotion',0.10],['Emergency',0.10]];let html='Budget '+b.toLocaleString()+' Tk<br>';items.forEach(([n,p])=>{html+=n+': '+Math.round(b*p).toLocaleString()+' Tk<br>';});document.getElementById('b_res').innerHTML=html;}
+function editPlan(){const plat=document.getElementById('e_platform').value;const len=+document.getElementById('e_len').value||10;document.getElementById('e_res').innerHTML='Platform: '+plat+'<br>Length: '+len+' min<br>Editing Time: ~'+Math.ceil(len/2)+' days<br>Export: 1080p, 24fps, MP4';}
+let castList=[];function addCast(){const ch=document.getElementById('cast_char').value||'Character';const actor=document.getElementById('cast_actor').value||'Not selected';castList.push('<b>'+ch+'</b> - '+actor);document.getElementById('cast_list').innerHTML=castList.join('<br><br>')+'<br><br><b>Total: '+castList.length+'</b>';}
+function clearCast(){castList=[];document.getElementById('cast_list').innerHTML='No cast yet / এখনো কেউ নাই / Aucun acteur';}
+function musicSuggest(){const mood=document.getElementById('mus_mood').value;const map={emotional:'Piano soft + Violin slow. Volume 20%.',happy:'Upbeat Ukulele + Drums.',horror:'Low drone + Heartbeat. Silence is scarier!',action:'Epic drums + Bass.',romantic:'Soft guitar + Flute.',islamic:'Nasheed (no music) / নাশিদ / Nasheed'};document.getElementById('mus_res').innerHTML='<b>'+mood.toUpperCase()+'</b><br>'+map[mood]+'<br><br>Free: YouTube Audio Library / Pixabay Music';}
+function makePromo(){const title=document.getElementById('p_title').value||'My Film';const date=document.getElementById('p_date').value||'Coming Soon';const plat=document.getElementById('p_plat').value;document.getElementById('promo_res').innerHTML='🎬 <b>'+title+'</b> আসছে! / Coming! / Arrive! 🎬<br><br>📅 Release: '+date+'<br>📱 Platform: '+plat+'<br><br>🔥 নতুন ফিল্ম আসছে! '+title+'<br>New Film Coming! '+title+'<br>Nouveau Film ! '+title+'<br><br>Share করে সবাইকে জানিয়ে দাও! / Share! / Partagez !<br>#DigitalFilmMaking #BangladeshiFilm';}
+</script>
+<script src="app.js" defer></script>
+</body>
+</html>
